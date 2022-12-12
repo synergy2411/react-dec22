@@ -80,3 +80,5 @@ Virtual DOM : Pure JavaScript; We can't access it; Diffing Algo
 /frontend> npm install bootstrap
 
 - index.tsx > import "bootstrap/dist/css/bootstrap.min.css"
+
+npm start --port=3001
