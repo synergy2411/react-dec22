@@ -66,13 +66,11 @@ function addAtBeginning<T>(val: T, arr: Array<T>): Array<T> {
     return [val, ...arr]
 }
 
-
-
 let strArray = addAtBeginning<string>("Hello", ["World"])
-strArray[0]
+// strArray[0]
 
 let numArray = addAtBeginning<number>(101, [99, 102])
-numArray[0]
+// numArray[0]
 
 
 
