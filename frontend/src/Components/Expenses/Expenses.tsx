@@ -36,7 +36,8 @@ const Expenses = () => {
     const onAddExpense = (exp: IExpense) => {
         axios.post("http://localhost:3030/expenses", exp)
             .then(response => {
-                setExpenses((prevExpenses) => [response.data, ...prevExpenses])
+                fetchExpenses()
+                // setExpenses((prevExpenses) => [response.data, ...prevExpenses])
                 // console.log(response)
             }).catch(console.error)
 
@@ -61,9 +62,11 @@ const Expenses = () => {
 
             {show && <AddExpense addExpense={onAddExpense} />}
 
-            {expenses.length > 0 ? <div className="row">
-                {expenses.map(exp => <ExpenseItem expense={exp} key={exp.id} deleteExpense={onDeleteExpense} />)}
-            </div> : <p>Be the first to add expense</p>}
+            {expenses.length > 0 ?
+                <div className="row">
+                    {expenses.map(exp => <ExpenseItem expense={exp} key={exp.id} deleteExpense={onDeleteExpense} />)}
+                </div> :
+                <p>Be the first to add expense</p>}
         </div>
     )
 }
