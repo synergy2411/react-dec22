@@ -1,8 +1,10 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { v4 } from 'uuid';
+import IExpense from '../../../model/expense.interface';
 import classes from './AddExpense.module.css';
 
-const AddExpense = () => {
+const AddExpense: React.FC<{ addExpense: (exp: IExpense) => void }> = (props) => {
 
     // const [user, setUser] = useState<{name : string, age:  number}>({ name : '', age: 0})
 
@@ -16,7 +18,15 @@ const AddExpense = () => {
 
     const submitHandler = (event: FormEvent) => {
         event.preventDefault();
-        console.log(enteredTitle, enteredAmount, enteredCreatedAt)
+        console.log(enteredTitle, enteredAmount, enteredCreatedAt);
+        let newExpense: IExpense = {
+            id: v4(),
+            title: enteredTitle,
+            amount: Number(enteredAmount),
+            createdAt: new Date(enteredCreatedAt)
+        }
+        // console.log(newExpense)
+        props.addExpense(newExpense)                // Lifting-up the state
     }
     return createPortal(
         <div className={`row ${classes['backdrop']}`}>
@@ -45,7 +55,7 @@ const AddExpense = () => {
                     </div>
                 </div>
             </div>
-        </div>, document.body
+        </div>, document.getElementById("modal") as HTMLElement
     );
 }
 

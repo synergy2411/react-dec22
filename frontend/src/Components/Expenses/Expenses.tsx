@@ -3,18 +3,25 @@ import IExpense from "../../model/expense.interface";
 import AddExpense from "./AddExpense/AddExpense";
 import ExpenseItem from "./ExpenseItem/ExpenseItem";
 
+const INTIAL_EXPENSES: Array<IExpense> = [
+    { id: "e001", title: "shopping", amount: 12.9, createdAt: new Date("Dec 9, 2022") },
+    { id: "e002", title: "planting", amount: 32.1, createdAt: new Date("Nov 19, 2021") },
+    { id: "e003", title: "grocery", amount: 9.9, createdAt: new Date("Jan 12, 2020") }
+]
+
 const Expenses = () => {
 
-    let expenses: Array<IExpense> = [
-        { id: "e001", title: "shopping", amount: 12.9, createdAt: new Date("Dec 9, 2022") },
-        { id: "e002", title: "planting", amount: 32.1, createdAt: new Date("Nov 19, 2021") },
-        { id: "e003", title: "grocery", amount: 9.9, createdAt: new Date("Jan 12, 2020") }
-    ]
+    const [expenses, setExpenses] = useState<Array<IExpense>>(INTIAL_EXPENSES)
 
     const [show, setShow] = useState<boolean>(false)
 
     const showClickHandler = () => {
         setShow(!show)
+    }
+
+    const onAddExpense = (exp: IExpense) => {
+        setExpenses((prevExpenses) => [exp, ...prevExpenses])
+        setShow(false)
     }
     return (
         <div>
@@ -23,12 +30,10 @@ const Expenses = () => {
             <button className="btn btn-primary" onClick={showClickHandler}>
                 {show ? 'Hide' : 'Show'} Form</button>
 
-            {show && <AddExpense />}
+            {show && <AddExpense addExpense={onAddExpense} />}
 
             <div className="row">
-                <ExpenseItem expense={expenses[0]} />
-                <ExpenseItem expense={expenses[1]} />
-                <ExpenseItem expense={expenses[2]} />
+                {expenses.map(exp => <ExpenseItem expense={exp} key={exp.id} />)}
             </div>
         </div>
     )
