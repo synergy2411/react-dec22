@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { v4 } from 'uuid';
 import IExpense from '../../../model/expense.interface';
@@ -7,6 +7,8 @@ import classes from './AddExpense.module.css';
 const AddExpense: React.FC<{ addExpense: (exp: IExpense) => void }> = (props) => {
 
     // const [user, setUser] = useState<{name : string, age:  number}>({ name : '', age: 0})
+
+    let amountInputRef = useRef<HTMLInputElement>(null);
 
     const [enteredTitle, setEnteredTitle] = useState<string>('');
     const [enteredAmount, setEnteredAmount] = useState<string>('')
@@ -18,11 +20,12 @@ const AddExpense: React.FC<{ addExpense: (exp: IExpense) => void }> = (props) =>
 
     const submitHandler = (event: FormEvent) => {
         event.preventDefault();
-        console.log(enteredTitle, enteredAmount, enteredCreatedAt);
+        // console.log(enteredTitle, enteredAmount, enteredCreatedAt);
         let newExpense: IExpense = {
             id: v4(),
             title: enteredTitle,
-            amount: Number(enteredAmount),
+            // amount: Number(enteredAmount),
+            amount: Number(amountInputRef.current?.value),
             createdAt: new Date(enteredCreatedAt)
         }
         // console.log(newExpense)
@@ -41,7 +44,11 @@ const AddExpense: React.FC<{ addExpense: (exp: IExpense) => void }> = (props) =>
 
                             {/* amount */}
                             <label htmlFor='amount'>Amount :</label>
-                            <input type="number" name='amount' className='form-control' onChange={amountChangeHandler} />
+                            {/* <input type="number" name='amount' 
+                                className='form-control' 
+                                onChange={amountChangeHandler} value=enteredAmount} /> */}
+
+                            <input type="number" ref={amountInputRef} name="amount" />
 
                             {/* createdAt */}
                             <label htmlFor='created-at'>Created At:</label>

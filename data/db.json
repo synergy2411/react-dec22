@@ -1,0 +1,22 @@
+{
+  "expenses": [
+    {
+      "id": "e001",
+      "title": "shopping",
+      "amount": 12.9,
+      "createdAt": "Dec 9, 2022"
+    },
+    {
+      "id": "e002",
+      "title": "planting",
+      "amount": 32.1,
+      "createdAt": "Nov 19, 2021"
+    },
+    {
+      "id": "e003",
+      "title": "grocery",
+      "amount": 9.9,
+      "createdAt": "Jan 12, 2020"
+    }
+  ]
+}
