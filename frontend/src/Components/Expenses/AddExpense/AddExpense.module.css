@@ -1,0 +1,19 @@
+.backdrop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50%;
+}
+
+.the-form {
+  position: absolute;
+  left: 30vw;
+  top: 20vh;
+  width: 40vw;
+  height: 60vh;
+  z-index: 75%;
+  background-color: #fff;
+}

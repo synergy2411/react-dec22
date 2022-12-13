@@ -1,6 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { createPortal } from 'react-dom';
+import classes from './AddExpense.module.css';
 
 const AddExpense = () => {
+
+    // const [user, setUser] = useState<{name : string, age:  number}>({ name : '', age: 0})
 
     const [enteredTitle, setEnteredTitle] = useState<string>('');
     const [enteredAmount, setEnteredAmount] = useState<string>('')
@@ -14,27 +18,34 @@ const AddExpense = () => {
         event.preventDefault();
         console.log(enteredTitle, enteredAmount, enteredCreatedAt)
     }
-    return (
-        <div>
-            <h2>Add Expense Form</h2>
-            <form onSubmit={submitHandler}>
-                {/* title */}
-                <label htmlFor='title'>Title :</label>
-                <input type="text" name='title' onChange={titleChangeHandler} />
-                <p>Entered Title : {enteredTitle} </p>
-                <br />
-                {/* amount */}
-                <label htmlFor='amount'>Amount :</label>
-                <input type="number" name='amount' onChange={amountChangeHandler} />
-                <br />
-                {/* createdAt */}
-                <label htmlFor='created-at'>Created At:</label>
-                <input type="date" name='created-at' onChange={createdAtChangeHandler} />
-                <br />
-                {/* button */}
-                <button className='btn btn-primary' type='submit'>Add Expense</button>
-            </form>
-        </div>
+    return createPortal(
+        <div className={`row ${classes['backdrop']}`}>
+            <div className="col-8 offset-2">
+                <div className={`card ${classes['the-form']}`}>
+                    <div className="card-body">
+                        <h2 className='text-center'>Add Expense Form</h2>
+                        <form onSubmit={submitHandler}>
+                            {/* title */}
+                            <label htmlFor='title'>Title :</label>
+                            <input type="text" name='title' className='form-control' onChange={titleChangeHandler} />
+
+                            {/* amount */}
+                            <label htmlFor='amount'>Amount :</label>
+                            <input type="number" name='amount' className='form-control' onChange={amountChangeHandler} />
+
+                            {/* createdAt */}
+                            <label htmlFor='created-at'>Created At:</label>
+                            <input type="date" name='created-at' className='form-control' onChange={createdAtChangeHandler} />
+
+                            {/* button */}
+                            <div className="d-grid">
+                                <button className='btn btn-primary my-2' type='submit'>Add Expense</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>, document.body
     );
 }
 

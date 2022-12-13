@@ -11,7 +11,7 @@ const Expenses = () => {
         { id: "e003", title: "grocery", amount: 9.9, createdAt: new Date("Jan 12, 2020") }
     ]
 
-    const [show, setShow] = useState<boolean>(true)
+    const [show, setShow] = useState<boolean>(false)
 
     const showClickHandler = () => {
         setShow(!show)
