@@ -37,7 +37,7 @@ const Expenses = () => {
         axios.post("http://localhost:3030/expenses", exp)
             .then(response => {
                 fetchExpenses()
-                // setExpenses((prevExpenses) => [response.data, ...prevExpenses])
+                setExpenses((prevExpenses) => [response.data, ...prevExpenses])
                 // console.log(response)
             }).catch(console.error)
 
