@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../../../context/authContext";
 
-const ChildDemo = (props: { show: boolean, demoFn: () => void }) => {
+const ChildDemo = (props: { show: boolean, demoFn: () => void, friends: Array<string> }) => {
 
     console.log("[CHILD]")
 
+    const context = useContext(AuthContext);
+
     return (
         <>
-            <h2>
-                The child Component
-            </h2>
+            {context.isLoggedIn && <h2> The child Component </h2>}
             {props.show && <p>Toggle Paragraph</p>}
         </>
     )
