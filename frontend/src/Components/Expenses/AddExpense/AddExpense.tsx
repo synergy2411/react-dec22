@@ -48,7 +48,7 @@ const AddExpense: React.FC<{ addExpense: (exp: IExpense) => void }> = (props) =>
                                 className='form-control' 
                                 onChange={amountChangeHandler} value=enteredAmount} /> */}
 
-                            <input type="number" ref={amountInputRef} name="amount" />
+                            <input type="number" className='form-control' ref={amountInputRef} name="amount" />
 
                             {/* createdAt */}
                             <label htmlFor='created-at'>Created At:</label>

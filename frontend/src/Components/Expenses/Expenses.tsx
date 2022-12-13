@@ -1,42 +1,62 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from 'axios';
 import IExpense from "../../model/expense.interface";
 import AddExpense from "./AddExpense/AddExpense";
 import ExpenseItem from "./ExpenseItem/ExpenseItem";
 
-const INTIAL_EXPENSES: Array<IExpense> = [
-    { id: "e001", title: "shopping", amount: 12.9, createdAt: new Date("Dec 9, 2022") },
-    { id: "e002", title: "planting", amount: 32.1, createdAt: new Date("Nov 19, 2021") },
-    { id: "e003", title: "grocery", amount: 9.9, createdAt: new Date("Jan 12, 2020") }
-]
+// const INTIAL_EXPENSES: Array<IExpense> = 
 
 const Expenses = () => {
 
-    const [expenses, setExpenses] = useState<Array<IExpense>>(INTIAL_EXPENSES)
+    const [expenses, setExpenses] = useState<Array<IExpense>>([])
 
     const [show, setShow] = useState<boolean>(false)
+
+    useEffect(() => {
+        axios.get("http://localhost:3030/expenses")
+            .then(response => {
+                const expArray = response.data.map((exp: any) => {
+                    return {
+                        amount: Number(exp.amount),
+                        createdAt: new Date(exp.createdAt),
+                        ...exp
+                    }
+                })
+                setExpenses(expArray)
+            }).catch(err => console.error(err))
+    }, [])
 
     const showClickHandler = () => {
         setShow(!show)
     }
 
     const onAddExpense = (exp: IExpense) => {
-        setExpenses((prevExpenses) => [exp, ...prevExpenses])
+        axios.post("http://localhost:3030/expenses", exp)
+            .then(response => {
+                setExpenses((prevExpenses) => [response.data, ...prevExpenses])
+                // console.log(response)
+            }).catch(console.error)
+
         setShow(false)
     }
-    return (
-        <div>
-            <h1 className="text-center">Expenses App</h1>
+    if (expenses.length > 0) {
 
-            <button className="btn btn-primary" onClick={showClickHandler}>
-                {show ? 'Hide' : 'Show'} Form</button>
+        return (
+            <div>
+                <h1 className="text-center">Expenses App</h1>
 
-            {show && <AddExpense addExpense={onAddExpense} />}
+                <button className="btn btn-primary" onClick={showClickHandler}>
+                    {show ? 'Hide' : 'Show'} Form</button>
 
-            <div className="row">
-                {expenses.map(exp => <ExpenseItem expense={exp} key={exp.id} />)}
+                {show && <AddExpense addExpense={onAddExpense} />}
+
+                <div className="row">
+                    {expenses.map(exp => <ExpenseItem expense={exp} key={exp.id} />)}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
+    return <p>Loading...</p>
 }
 
 export default Expenses;
