@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
 import axios from 'axios';
+import { useEffect, useState } from "react";
 import IExpense from "../../model/expense.interface";
 import AddExpense from "./AddExpense/AddExpense";
 import ExpenseItem from "./ExpenseItem/ExpenseItem";
 
-// const INTIAL_EXPENSES: Array<IExpense> = 
 
 const Expenses = () => {
 
@@ -13,6 +12,10 @@ const Expenses = () => {
     const [show, setShow] = useState<boolean>(false)
 
     useEffect(() => {
+        fetchExpenses()
+    }, [])
+
+    const fetchExpenses = () => {
         axios.get("http://localhost:3030/expenses")
             .then(response => {
                 const expArray = response.data.map((exp: any) => {
@@ -24,7 +27,7 @@ const Expenses = () => {
                 })
                 setExpenses(expArray)
             }).catch(err => console.error(err))
-    }, [])
+    }
 
     const showClickHandler = () => {
         setShow(!show)
@@ -39,24 +42,31 @@ const Expenses = () => {
 
         setShow(false)
     }
-    if (expenses.length > 0) {
 
-        return (
-            <div>
-                <h1 className="text-center">Expenses App</h1>
-
-                <button className="btn btn-primary" onClick={showClickHandler}>
-                    {show ? 'Hide' : 'Show'} Form</button>
-
-                {show && <AddExpense addExpense={onAddExpense} />}
-
-                <div className="row">
-                    {expenses.map(exp => <ExpenseItem expense={exp} key={exp.id} />)}
-                </div>
-            </div>
-        )
+    const onDeleteExpense = (expId: string) => {
+        axios.delete(`http://localhost:3030/expenses/${expId}`)
+            .then(response => {
+                fetchExpenses()
+            })
+            .catch(console.error)
     }
-    return <p>Loading...</p>
+
+
+    return (
+        <div>
+            <h1 className="text-center">Expenses App</h1>
+
+            <button className="btn btn-primary" onClick={showClickHandler}>
+                {show ? 'Hide' : 'Show'} Form</button>
+
+            {show && <AddExpense addExpense={onAddExpense} />}
+
+            {expenses.length > 0 ? <div className="row">
+                {expenses.map(exp => <ExpenseItem expense={exp} key={exp.id} deleteExpense={onDeleteExpense} />)}
+            </div> : <p>Be the first to add expense</p>}
+        </div>
+    )
 }
+
 
 export default Expenses;
