@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import IExpense from "../../model/expense.interface";
+import AddExpense from "./AddExpense/AddExpense";
 import ExpenseItem from "./ExpenseItem/ExpenseItem";
 
 const Expenses = () => {
@@ -9,7 +10,6 @@ const Expenses = () => {
         { id: "e002", title: "planting", amount: 32.1, createdAt: new Date("Nov 19, 2021") },
         { id: "e003", title: "grocery", amount: 9.9, createdAt: new Date("Jan 12, 2020") }
     ]
-
 
     const [show, setShow] = useState<boolean>(true)
 
@@ -21,9 +21,9 @@ const Expenses = () => {
             <h1 className="text-center">Expenses App</h1>
 
             <button className="btn btn-primary" onClick={showClickHandler}>
-                {show ? 'Hide' : 'Show'} Content</button>
+                {show ? 'Hide' : 'Show'} Form</button>
 
-            {show && <p>Showing the content</p>}
+            {show && <AddExpense />}
 
             <div className="row">
                 <ExpenseItem expense={expenses[0]} />
