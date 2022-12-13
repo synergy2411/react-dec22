@@ -4,6 +4,7 @@ import AuthContext from './context/authContext';
 import './App.css';
 import Auth from './Components/Auth/Auth';
 import UseReducerDemo from './Components/Demo/HooksDemo/UseReducerDemo';
+import ParentDemo from './Components/Demo/HooksDemo/ParentDemo';
 
 
 function App() {
@@ -14,7 +15,9 @@ function App() {
         <h1>Hello React</h1>
         {/* <Auth /> */}
 
-        <UseReducerDemo />
+        {/* <UseReducerDemo /> */}
+
+        <ParentDemo />
 
         {/* <Expenses /> */}
       </div>
