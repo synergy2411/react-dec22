@@ -1,5 +1,6 @@
 import CounterButton from "./CounterButton/CounterButton";
 import CounterOutput from "./CounterOutput/CounterOutput";
+import CounterResult from "./CounterResult/CounterResult";
 
 const Counter = () => {
 
@@ -8,6 +9,8 @@ const Counter = () => {
             <h1>The Counter Component</h1>
             <CounterOutput />
             <CounterButton />
+            <hr />
+            <CounterResult />
         </div>
     )
 }

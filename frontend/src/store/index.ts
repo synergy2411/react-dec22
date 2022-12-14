@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from './counter';
+import resultReducer from './result';
 
 const store = configureStore({
     reducer: {
-        ctr: counterReducer
+        ctr: counterReducer,
+        res: resultReducer
     }
 })
 
