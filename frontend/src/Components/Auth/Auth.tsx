@@ -1,13 +1,17 @@
 import { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+
 import AuthContext from "../../context/authContext";
 
 const Auth = () => {
 
     const context = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const loginClickHandler = () => {
         // context.token = token
         context.setIsLoggedIn(!context.isLoggedIn)
+        navigate("/")
     }
 
     return (
