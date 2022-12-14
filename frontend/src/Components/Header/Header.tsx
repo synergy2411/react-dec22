@@ -25,6 +25,9 @@ const Header = () => {
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/hooks">Hooks</NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/products">Products</NavLink>
+                    </li>
                     {context.isLoggedIn && <li className="nav-item">
                         <button className="btn btn-outline-danger btn-sm"
                             onClick={logoutClickHandler} >Logout</button>
