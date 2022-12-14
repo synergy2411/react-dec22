@@ -82,3 +82,37 @@ Virtual DOM : Pure JavaScript; We can't access it; Diffing Algo
 - index.tsx > import "bootstrap/dist/css/bootstrap.min.css"
 
 npm start --port=3001
+
+# useEffect(didUpdate) : runs on every render cycle
+
+# useEffect(didUpdate, []) : will run only once at the time of initial rendering
+
+# useEffect(didUpdate, [Dependencies]) : will run at the initial rendering, also run when the mentioned dependencies will change
+
+# useEffect(didUpdate => cleanUp, [Deps]) : clean-up will fire just before the didUpdate runs, but after the initial render
+
+> npm install json-server -g
+> json-server --watch db.json --port=3030
+
+> axios > npm i axios
+> fetch > browser builtin object - XHR
+
+> useContext(Context) : returns Consumer of the context
+> useReducer(ReducerFn) : to manage the complex state in Component
+> useCallback(cb) : returns memoized CB function
+> useMemo(cb => value) : returns memoized value
+
+useState() : for component level; simple state functionality
+useReducer() : for component level; complex state functionality
+useContext(Context) : for component branch level; No complex state management in context; Max 2-3 Context Provider
+
+redux : App-wide state management; any complex state here
+
+# Training Material Web-links
+
+- https://www.typescriptlang.org/docs/handbook/intro.html
+- https://reactjs.org/tutorial/tutorial.html
+- https://reactrouter.com/en/main/start/tutorial
+- https://redux-toolkit.js.org/tutorials/overview
+
+# synergy2411@outlook.com
