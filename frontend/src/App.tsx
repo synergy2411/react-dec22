@@ -8,6 +8,7 @@ import Auth from './Components/Auth/Auth';
 import ParentDemo from './Components/Demo/HooksDemo/ParentDemo';
 import Header from './Components/Header/Header';
 import Products, { Overview, Specification } from './Components/Products/Products';
+import Counter from './Components/Counter/Counter';
 
 const UseReducerDemo = React.lazy(() => import('./Components/Demo/HooksDemo/UseReducerDemo'))
 const LazyAuth = React.lazy(() => import("./Components/Auth/Auth"))
@@ -34,6 +35,7 @@ function App() {
             <Route path='/auth' element={<LazyAuth />} />
             <Route path='/hooks' element={<ParentDemo />} />
             <Route path='/reducer' element={<UseReducerDemo />} />
+            <Route path='/counter' element={<Counter />} />
             {/* <Route path='/products/*' element={<Products />}> */}
             <Route path='/products' element={<Products />}>
               <Route path='/products/:productId/:qty/overview' element={<Overview />} />
