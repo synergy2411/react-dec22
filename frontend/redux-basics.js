@@ -1,7 +1,14 @@
 // import { } from '@reduxjs/toolkit';              // ES6 Module
 
-const { configureStore, createSlice } = require("@reduxjs/toolkit");            // CommonJS Import : NodeJS Default
+const { configureStore, createSlice, MiddlewareArray } = require("@reduxjs/toolkit");            // CommonJS Import : NodeJS Default
 
+const yourOwnMiddleware = store => next => action => {
+    // Perform any Async and Sync Operation here
+    console.log("[LOGGER]", store.getState())
+    console.log("[LOGGER]", action)
+    return next(action);
+
+}
 
 const initialState = {
     value: 0
@@ -25,7 +32,8 @@ const counterReducer = counterSlice.reducer;
 const store = configureStore({
     reducer: {
         ctr: counterReducer
-    }
+    },
+    middleware: new MiddlewareArray().concat(yourOwnMiddleware)
 })
 
 // SUBSCRIPTION
