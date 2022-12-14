@@ -1,3 +1,4 @@
+import CounterButton from "./CounterButton/CounterButton";
 import CounterOutput from "./CounterOutput/CounterOutput";
 
 const Counter = () => {
@@ -6,6 +7,7 @@ const Counter = () => {
         <div className="container">
             <h1>The Counter Component</h1>
             <CounterOutput />
+            <CounterButton />
         </div>
     )
 }
